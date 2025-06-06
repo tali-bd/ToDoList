@@ -17,13 +17,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="CM3-gf-N9v">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="CM3-gf-N9v" customClass="ToDoCell" customModule="ToDoList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CM3-gf-N9v" id="s3p-80-wyo">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CM3-gf-N9v" id="s3p-80-wyo" customClass="ToDoCell" customModule="ToDoList" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="1sX-cE-LD0" kind="presentation" identifier="EditToDo" id="QVh-7u-ny1"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -63,18 +66,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lQ5-vp-xVa">
-                                                    <rect key="frame" x="98" y="5" width="268" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="returnPressed:" destination="aRi-kg-cDe" eventType="primaryActionTriggered" id="Ds5-bV-8cy"/>
-                                                        <action selector="textEditingChanged:" destination="aRi-kg-cDe" eventType="editingChanged" id="rdk-fT-G8O"/>
-                                                    </connections>
-                                                </textField>
                                                 <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" enabled="NO" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Csj-x0-kj4">
-                                                    <rect key="frame" x="27" y="0.0" width="44" height="44"/>
+                                                    <rect key="frame" x="0.0" y="-1" width="44" height="44.333333333333336"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="-8" maxY="0.0"/>
@@ -86,10 +79,19 @@
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="CheckMark:" destination="aRi-kg-cDe" eventType="touchUpInside" id="LNw-Nx-L9h"/>
-                                                        <action selector="checkMarkTapped:" destination="aRi-kg-cDe" eventType="touchUpInside" id="Z8E-os-7LG"/>
+                                                        <action selector="checkMarkTapped:" destination="aRi-kg-cDe" eventType="touchUpInside" id="bOW-2S-PyD"/>
                                                     </connections>
                                                 </button>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remember to do..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="80e-F2-vIb">
+                                                    <rect key="frame" x="52" y="4" width="331" height="34"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="returnPressed:" destination="aRi-kg-cDe" eventType="primaryActionTriggered" id="hHW-r2-3d6"/>
+                                                        <action selector="textEditingChanged:" destination="aRi-kg-cDe" eventType="editingChanged" id="k05-Ku-c0O"/>
+                                                    </connections>
+                                                </textField>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -114,8 +116,15 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Qqf-v0-c7P" firstAttribute="leading" secondItem="9k5-jw-jVJ" secondAttribute="leadingMargin" constant="15" id="CGc-j7-9UX"/>
+                                                <constraint firstItem="Qqf-v0-c7P" firstAttribute="leading" secondItem="9k5-jw-jVJ" secondAttribute="leadingMargin" constant="27" id="9vC-nj-kfh"/>
+                                                <constraint firstItem="mHJ-Bu-2Sd" firstAttribute="top" secondItem="9k5-jw-jVJ" secondAttribute="topMargin" id="Gmr-JY-a81"/>
+                                                <constraint firstItem="mHJ-Bu-2Sd" firstAttribute="leading" secondItem="Qqf-v0-c7P" secondAttribute="trailing" constant="145" id="HWz-gW-Pff"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="mHJ-Bu-2Sd" secondAttribute="trailing" constant="15" id="QFt-l4-XtV"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Qqf-v0-c7P" secondAttribute="bottom" constant="0.69999999999999996" id="TfW-QG-GpA"/>
+                                                <constraint firstItem="mHJ-Bu-2Sd" firstAttribute="leading" secondItem="Qqf-v0-c7P" secondAttribute="trailing" constant="145" id="a6Z-ZD-Pi4"/>
+                                                <constraint firstItem="Qqf-v0-c7P" firstAttribute="top" secondItem="9k5-jw-jVJ" secondAttribute="topMargin" id="hp2-eE-7ec"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="mHJ-Bu-2Sd" secondAttribute="trailing" constant="15" id="ngi-lg-f4l"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="mHJ-Bu-2Sd" secondAttribute="bottom" constant="0.69999999999999996" id="wNW-90-uhW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -129,7 +138,7 @@
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="4dm-CK-8yn">
                                                     <rect key="frame" x="15" y="0.0" width="363" height="36"/>
                                                     <connections>
-                                                        <action selector="DueDatePicker:" destination="aRi-kg-cDe" eventType="valueChanged" id="1vj-sU-pfD"/>
+                                                        <action selector="datePickerChanged:" destination="aRi-kg-cDe" eventType="primaryActionTriggered" id="Zg6-3W-dJE"/>
                                                     </connections>
                                                 </datePicker>
                                             </subviews>
@@ -183,25 +192,25 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" largeTitleDisplayMode="never" id="g3u-vt-SmE">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="9zQ-RD-8hp">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="uDP-WJ-13c">
                             <connections>
-                                <action selector="cancelButton:" destination="7bE-LU-XkD" id="1tu-fx-B4S"/>
+                                <segue destination="7bE-LU-XkD" kind="unwind" unwindAction="unwindToToDoListWithSegue:" id="Lmg-bX-PEE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="Fea-WB-ume">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="y0Z-nc-m8o">
                             <connections>
-                                <action selector="saveButton:" destination="7bE-LU-XkD" id="1Jc-Or-eZa"/>
+                                <segue destination="7bE-LU-XkD" kind="unwind" identifier="saveUnwind" unwindAction="unwindToToDoListWithSegue:" id="9y7-i2-AGK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="CheckMarkOutlet" destination="Csj-x0-kj4" id="MF0-DU-7ZQ"/>
-                        <outlet property="DueDateLabel" destination="mHJ-Bu-2Sd" id="JPg-Tz-jra"/>
-                        <outlet property="DueDatePicker" destination="4dm-CK-8yn" id="IvL-Ge-ePA"/>
-                        <outlet property="Notes" destination="aWn-1K-rgK" id="VbG-aK-9e2"/>
-                        <outlet property="SaveButton" destination="Fea-WB-ume" id="1Qd-YH-kyK"/>
-                        <outlet property="TaskName" destination="lQ5-vp-xVa" id="Ew0-Nn-LM8"/>
-                        <outlet property="cancelButton" destination="9zQ-RD-8hp" id="v9W-g2-mMK"/>
+                        <outlet property="cancelButton" destination="uDP-WJ-13c" id="APd-Je-NbS"/>
+                        <outlet property="checkMark" destination="Csj-x0-kj4" id="chb-i6-0GH"/>
+                        <outlet property="dueDateLabel" destination="mHJ-Bu-2Sd" id="O8e-de-AAC"/>
+                        <outlet property="dueDatePicker" destination="4dm-CK-8yn" id="A0Y-Ku-yyn"/>
+                        <outlet property="notes" destination="aWn-1K-rgK" id="ANn-bK-cNs"/>
+                        <outlet property="saveButton" destination="y0Z-nc-m8o" id="G8I-IK-DbG"/>
+                        <outlet property="textToDo" destination="80e-F2-vIb" id="227-Uk-8nt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PYX-Z5-HQ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -242,6 +251,9 @@
             <point key="canvasLocation" x="-1735" y="-12"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="QVh-7u-ny1"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Checked" width="44" height="44"/>
         <image name="Unchecked" width="44" height="44"/>
