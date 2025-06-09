@@ -11,6 +11,13 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
     func checkmarkTapped(sender: ToDoCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var todo = todos[indexPath.row]
+            todo.isComplete = !todo.isComplete
+            todos[indexPath.row] = todo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(todos)
+        }
         
     }
     
@@ -32,6 +39,8 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
                     tableView.insertRows(at: [newIndexPath], with: .automatic)
                 }
             }
+        
+        ToDo.saveToDos(todos)
                 
             //let newIndexPath = IndexPath(row: todos.count, section: 0)
 
@@ -107,6 +116,7 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
         if editingStyle == .delete {
             todos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            ToDo.saveToDos(todos)
         }
     }
     
