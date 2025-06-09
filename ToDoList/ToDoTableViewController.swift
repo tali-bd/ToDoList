@@ -9,9 +9,13 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController {
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
+    func checkmarkTapped(sender: ToDoCell) {
+        <#code#>
+    }
     
     var todos = [ToDo]()
+
 
     
     @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
@@ -87,7 +91,7 @@ class ToDoTableViewController: UITableViewController {
             }
 
         let todo = todos[indexPath.row]
-        cell.textToDo?.text = todo.title
+        cell.toDoTitle?.text = todo.title
         //cell.checkMark.isSelected = todo.isComplete
         return cell
     }

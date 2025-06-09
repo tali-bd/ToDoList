@@ -7,16 +7,21 @@
 
 import UIKit
 
+protocol ToDoCellDelegate: AnyObject {
+    func checkmarkTapped(sender: ToDoCell)
+}
+
 class ToDoCell: UITableViewCell {
 
+
+    weak var delegate: ToDoCellDelegate?
     
+    @IBOutlet var checkMarkStatic: UIButton!
+    @IBOutlet var toDoTitle: UILabel!
     
-    
-    @IBOutlet var checkMark: UIButton!
-    
-    
-    @IBOutlet var textToDo: UITextField!
-    
+    @IBAction func checkMarkStaticTapped(_ sender: UIButton) {
+        delegate?.checkmarkTapped(sender: self)
+    }
     
     
     override func awakeFromNib() {
