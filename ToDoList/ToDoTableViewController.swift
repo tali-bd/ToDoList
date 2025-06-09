@@ -11,7 +11,7 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
     func checkmarkTapped(sender: ToDoCell) {
-        <#code#>
+        
     }
     
     var todos = [ToDo]()
@@ -90,9 +90,12 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             fatalError("Could not dequeue a cell")
             }
 
+        cell.delegate = self
+        
         let todo = todos[indexPath.row]
         cell.toDoTitle?.text = todo.title
         //cell.checkMark.isSelected = todo.isComplete
+        
         return cell
     }
     
